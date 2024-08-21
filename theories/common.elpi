@@ -93,19 +93,19 @@ register-instance Scope DbName Proj Pat Pred :- std.do! [
 pred canonical-init i:scope, i:id.
 canonical-init Scope DbName :- std.do! [
   register-instance Scope DbName
-    {{:gref GRing.AddUMagma.sort }} {{:gref nat }} canonical-nat-addumagma,
+    {{:gref GRing.BaseAddUMagma.sort }} {{:gref nat }} canonical-nat-addumagma,
   register-instance Scope DbName
     {{:gref GRing.SemiRing.sort }} {{:gref nat }} canonical-nat-semiring,
   register-instance Scope DbName
     {{:gref GRing.ComSemiRing.sort }} {{:gref nat }} canonical-nat-comsemiring,
   register-instance Scope DbName
-    {{:gref GRing.AddUMagma.sort }} {{:gref N }} canonical-N-addumagma,
+    {{:gref GRing.BaseAddUMagma.sort }} {{:gref N }} canonical-N-addumagma,
   register-instance Scope DbName
     {{:gref GRing.SemiRing.sort }} {{:gref N }} canonical-N-semiring,
   register-instance Scope DbName
     {{:gref GRing.ComSemiRing.sort }} {{:gref N }} canonical-N-comsemiring,
   register-instance Scope DbName
-    {{:gref GRing.AddUMagma.sort }} {{:gref int }} canonical-int-addumagma,
+    {{:gref GRing.BaseAddUMagma.sort }} {{:gref int }} canonical-int-addumagma,
   register-instance Scope DbName
     {{:gref GRing.Zmodule.sort }} {{:gref int }} canonical-int-zmodule,
   register-instance Scope DbName
@@ -117,7 +117,7 @@ canonical-init Scope DbName :- std.do! [
   register-instance Scope DbName
     {{:gref GRing.UnitRing.sort }} {{:gref int }} canonical-int-unitring,
   register-instance Scope DbName
-    {{:gref GRing.AddUMagma.sort }} {{:gref Z }} canonical-Z-addumagma,
+    {{:gref GRing.BaseAddUMagma.sort }} {{:gref Z }} canonical-Z-addumagma,
   register-instance Scope DbName
     {{:gref GRing.Zmodule.sort }} {{:gref Z }} canonical-Z-zmodule,
   register-instance Scope DbName
@@ -158,14 +158,14 @@ pred field-mode.
 
 kind additive type.
 type additive
-  term ->           % baseAddUMagmaType
+  term ->           % baseBaseAddUMagmaType
   option term ->    % zmodType
   (term -> term) -> % additive morphism
   additive.
 
 kind rmorphism type.
 type rmorphism
-  term ->           % baseAddUMagmaType
+  term ->           % baseBaseAddUMagmaType
   option term ->    % zmodType
   term ->           % semiRingType
   option term ->    % ringType
@@ -379,7 +379,7 @@ addumag.additive V (additive U _ Morph) NewMorph NewMorphInst In1
   build.mul { build.variable { positive-constant {calc (N + 1)} } } Out1 Out.
 addumag.additive V (additive U _ Morph) NewMorph NewMorphInst In1
               {{ @MAdditive lp:V lp:U lp:NewMorphInst lp:OutM1 }} Out1 VM :- !,
-  if (coq.unify-eq {{ GRing.AddUMagma.sort lp:V }}
+  if (coq.unify-eq {{ GRing.BaseAddUMagma.sort lp:V }}
                    {{ GRing.Zmodule.sort lp:V' }} ok)
      (V'' = some V') (V'' = none), !,
   addumag (additive V V'' (x\ Morph (NewMorph x))) In1 OutM1 Out1 VM, !.
@@ -505,7 +505,7 @@ ring C {{ @GRing.exp lp:R' lp:In1 lp:In2 }}
 ring C {{ @exprz lp:R' lp:In1 lp:In2 }} OutM Out VM :-
   z-const In2 Pos OutM2 Out2,
   rmorphism->uring C R,
-  std.spy (coq.unify-eq R R' ok),
+  coq.unify-eq R R' ok,
   if (Pos = tt)
      (CONT =
        (!, ring C In1 OutM1 Out1 VM, !,
@@ -600,7 +600,7 @@ ring _ In _ _ _ :- coq.error "Unknown" { coq.term->string In }.
 pred ring.rmorphism.aux i:term, i:term -> term, o:rmorphism.
 ring.rmorphism.aux SR Morph (rmorphism U V' SR R' UR' F' Morph) :- !,
   Sort = {{ GRing.SemiRing.sort lp:SR }},
-  coq.unify-eq Sort {{ GRing.AddUMagma.sort lp:U }} ok,
+  coq.unify-eq Sort {{ GRing.BaseAddUMagma.sort lp:U }} ok,
   if (target-zmodule _, coq.unify-eq Sort {{ GRing.Ring.sort lp:R }} ok,
       coq.unify-eq Sort {{ GRing.Zmodule.sort lp:V }} ok)
      (V' = some V, R' = some R,
@@ -677,7 +677,7 @@ ring.additive V C NewMorph NewMorphInst In1
 ring.additive V C NewMorph NewMorphInst In1
               {{ @RAdditive lp:V lp:R lp:NewMorphInst lp:OutM1 }} Out1 VM :- !,
   rmorphism->sring C R, rmorphism->morph C Morph,
-  if (coq.unify-eq {{ GRing.AddUMagma.sort lp:V }}
+  if (coq.unify-eq {{ GRing.BaseAddUMagma.sort lp:V }}
                    {{ GRing.Zmodule.sort lp:V' }} ok)
      (V'' = some V') (V'' = none), !,
   addumag (additive V V'' (x\ Morph (NewMorph x))) In1 OutM1 Out1 VM, !.

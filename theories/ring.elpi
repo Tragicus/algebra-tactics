@@ -177,10 +177,10 @@ ring (goal _ _ P _ Args as G) GS :-
     list->conj LpeProofs LpeProofs',
     std.assert-ok! (coq.typecheck LpeProofs' _) "Ill-typed equations",
     std.time (
-		coq.ltac.call-with-error "ring_reflection"
-		  [trm Lem, trm ComRing, trm VM', trm Lpe',
-			trm RE1, trm RE2, trm PE1, trm PE2, trm LpeProofs']
-		  "Not a valid ring equation" G GS
+      coq.ltac.call-with-error "ring_reflection"
+        [trm Lem, trm ComRing, trm VM', trm Lpe',
+        trm RE1, trm RE2, trm PE1, trm PE2, trm LpeProofs']
+        "Not a valid ring equation" G GS
     ) ReflTime,
     if-verbose (coq.say "Reflection:" ReflTime "sec."),
   ].

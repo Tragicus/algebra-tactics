@@ -1376,21 +1376,17 @@ End RealField.
 Elpi Db canonicals.db lp:{{
 
 pred canonical-nat-addumagma o:constant.
-pred canonical-nat-addumagma o:constant.
 pred canonical-nat-semiring o:constant.
 pred canonical-nat-comsemiring o:constant.
 pred canonical-N-addumagma o:constant.
-pred canonical-N-addumagma o:constant.
 pred canonical-N-semiring o:constant.
 pred canonical-N-comsemiring o:constant.
-pred canonical-int-addumagma o:constant.
 pred canonical-int-addumagma o:constant.
 pred canonical-int-zmodule o:constant.
 pred canonical-int-semiring o:constant.
 pred canonical-int-ring o:constant.
 pred canonical-int-comring o:constant.
 pred canonical-int-unitring o:constant.
-pred canonical-Z-addumagma o:constant.
 pred canonical-Z-addumagma o:constant.
 pred canonical-Z-zmodule o:constant.
 pred canonical-Z-semiring o:constant.
