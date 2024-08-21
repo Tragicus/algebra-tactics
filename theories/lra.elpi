@@ -8,7 +8,7 @@ type carrier
   term ->        % Type
   term ->        % eqType
   term ->        % porderType
-  term ->        % addUMagmaType
+  term ->        % baseAddUMagmaType
   term ->        % zmodType
   term ->        % semiRingType
   term ->        % ringType
@@ -47,8 +47,8 @@ mk-carrier Ty (carrier Ty EQ PO U V SR R UR F' RD RF') Env :- std.do! [
                  "Cannot find a declared eqType",
   std.assert-ok! (coq.unify-eq Ty {{ @Order.POrder.sort _ lp:PO }})
                  "Cannot find a declared porderType",
-  std.assert-ok! (coq.unify-eq Ty {{ GRing.AddUMagma.sort lp:U }})
-                 "Cannot find a declared addUMagmaType",
+  std.assert-ok! (coq.unify-eq Ty {{ GRing.BaseAddUMagma.sort lp:U }})
+                 "Cannot find a declared baseAddUMagmaType",
   std.assert-ok! (coq.unify-eq Ty {{ GRing.Zmodule.sort lp:V }})
                  "Cannot find a declared zmodType",
   std.assert-ok! (coq.unify-eq Ty {{ GRing.SemiRing.sort lp:SR }})

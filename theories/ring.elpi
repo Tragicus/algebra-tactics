@@ -38,8 +38,8 @@ mk-ring-morphism Ty rmorphism-Z {{ ring_correct }} {{ target_Z }} Env :-
          target-semiring (global (const ZSemiRing)),
          target-zmodule (global (const ZZmodule)) | REnv].
 mk-ring-morphism Ty (rmorphism U V' SR R' UR' none (x\ x)) Lem CR Env :- !,
-  std.assert-ok! (coq.unify-eq Ty {{ GRing.AddUMagma.sort lp:U }})
-                 "Cannot find a declared addUMagma",
+  std.assert-ok! (coq.unify-eq Ty {{ GRing.BaseAddUMagma.sort lp:U }})
+                 "Cannot find a declared BaseAddUMagma",
   std.assert-ok! (coq.unify-eq Ty {{ GRing.SemiRing.sort lp:SR }})
                  "Cannot find a declared semiRingType",
   if (coq.unify-eq Ty {{ GRing.Zmodule.sort lp:V }} ok,
@@ -70,8 +70,8 @@ mk-field-morphism
   [target-addumagma U, target-semiring SR, target-zmodule V | REnv]
   [field-mode, target-addumagma U, target-semiring SR, target-zmodule V | FEnv] :-
   std.do! [
-    std.assert-ok! (coq.unify-eq Ty {{ GRing.AddUMagma.sort lp:U }})
-                   "Cannot find a declared addUMagma",
+    std.assert-ok! (coq.unify-eq Ty {{ GRing.BaseAddUMagma.sort lp:U }})
+                   "Cannot find a declared baseAddUMagma",
     std.assert-ok! (coq.unify-eq Ty {{ GRing.Zmodule.sort lp:V }})
                    "Cannot find a declared zmodType",
     std.assert-ok! (coq.unify-eq Ty {{ GRing.SemiRing.sort lp:SR }})

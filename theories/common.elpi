@@ -157,14 +157,14 @@ pred field-mode.
 
 kind additive type.
 type additive
-  term ->           % addUMagmaType
+  term ->           % baseAddUMagmaType
   option term ->    % zmodType
   (term -> term) -> % additive morphism
   additive.
 
 kind rmorphism type.
 type rmorphism
-  term ->           % addUMagmaType
+  term ->           % baseAddUMagmaType
   option term ->    % zmodType
   term ->           % semiRingType
   option term ->    % ringType

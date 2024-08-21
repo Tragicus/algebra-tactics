@@ -12,7 +12,7 @@ Unset Printing Implicit Defensive.
 
 Local Open Scope ring_scope.
 
-Implicit Types (V : addUMagmaType) (R : semiRingType) (F : fieldType).
+Implicit Types (V : baseAddUMagmaType) (R : semiRingType) (F : fieldType).
 
 (* Some basic facts about `Decimal.uint` and `Hexadecimal.uint`               *)
 
@@ -233,7 +233,7 @@ Inductive RExpr : semiRingType -> Type :=
   | RZAdditive R : {additive Z -> R} -> RExpr Z -> RExpr R
   (* variables *)
   | RX R : R -> RExpr R
-with MExpr : addUMagmaType -> Type :=
+with MExpr : baseAddUMagmaType -> Type :=
   | M0 V : MExpr V
   | MAdd V : MExpr V -> MExpr V -> MExpr V
   | MMuln V : MExpr V -> RExpr nat -> MExpr V
